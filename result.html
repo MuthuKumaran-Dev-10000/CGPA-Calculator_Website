@@ -1,0 +1,86 @@
+<!-- result.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculation Results</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>CGPA Calculation Results</h1>
+
+    <table>
+        <tr>
+            <th>Subject Name</th>
+            <th>Internal (Obtained/Total)</th>
+            <th>Assignment (Obtained/Total)</th>
+            <th>External (Obtained/Total)</th>
+            <th>Credits</th>
+            <th>Credit Earned</th>
+        </tr>
+        <!-- JavaScript code will populate this table -->
+    </table>
+
+    <div id="result-summary">
+        <!-- JavaScript code will populate this div -->
+    </div>
+
+    <script>
+        // Parse the data from URL parameter
+        var urlParams = new URLSearchParams(window.location.search);
+        var data = JSON.parse(decodeURIComponent(urlParams.get('data')));
+        var totalCreditEarned = parseFloat(urlParams.get('totalCreditEarned'));
+        var totalCredits = data.reduce((total, subject) => total + subject.credits, 0);
+        var gpa = parseFloat(urlParams.get('gpa'));
+
+        // Function to populate the table
+        function populateTable() {
+            var tableBody = document.querySelector('table');
+
+            data.forEach(function (subject) {
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${subject.name}</td>
+                    <td>${subject.internal}</td>
+                    <td>${subject.assignment}</td>
+                    <td>${subject.external}</td>
+                    <td>${subject.credits}</td>
+                    <td>${subject.creditEarned}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to display summary
+        function displaySummary() {
+            var resultSummary = document.getElementById('result-summary');
+            resultSummary.innerHTML = `
+                <p>Total Credits: ${totalCredits}</p>
+                <p>Total Credits Earned: ${totalCreditEarned}</p>
+                <p>GPA: ${gpa.toFixed(2)}</p>
+            `;
+        }
+
+        // Call the function to populate the table and display summary
+        populateTable();
+        displaySummary();
+    </script>
+</body>
+</html>
