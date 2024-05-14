@@ -1,0 +1,31 @@
+<!-- calculation.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CGPA Calculator - Calculation</title>
+  <link rel="stylesheet" href="styles.css">
+<!-- Include jsPDF library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+<!-- Include your custom script -->
+<script src="script.js"></script>
+
+
+</head>
+<body>
+  <div class="calculation-container">
+    <h1>CGPA Calculator</h1>
+    <form id="calculation-form">
+      <div id="subject-container"></div>
+      <button type="button" onclick="calculateCGPA()">display</button>
+      <button type="button" onclick="calculateCredits(event)">Calculate</button>
+
+    </form>
+  </div>
+
+  
+</body>
+</html>
